@@ -1,18 +1,34 @@
 // settings
 
-const p1newName = document.getElementById("p1name").value;
-const p1newCol = document.getElementById("p1col").value;
-const p2newName = document.getElementById("p2name").value;
-const p2newCol = document.getElementById("p2col").value;
-const tossCol = document.getElementById("tiecol").value;
+let p1newName = document.getElementById("p1name").value;
+let p1newCol = document.getElementById("p1col").value;
+let p2newName = document.getElementById("p2name").value;
+let p2newCol = document.getElementById("p2col").value;
+let tossCol = document.getElementById("tiecol").style.backgroundColor;
 
 function set() {
+	p1newName = document.getElementById("p1name").value;
+	p1newCol = document.getElementById("p1col").value;
+	p2newName = document.getElementById("p2name").value;
+	p2newCol = document.getElementById("p2col").value;
+	tossCol = document.getElementById("tiecol").style.backgroundColor;
+	
     document.getElementById("player1name").innerHTML = p1newName;
     document.getElementById("player2name").innerHTML = p2newName;
     document.getElementById("player1").style.color = p1newCol;
     document.getElementById("player2").style.color = p2newCol;
     document.getElementById("player1bar").style.backgroundColor = p1newCol;
     document.getElementById("player2bar").style.backgroundColor = p2newCol;
+	
+	for (let i = 0; i < winner.length; i++) {
+		switch(winner[i]) {
+			case 1:
+				document.getElementById("winner" + (i+1)).style.backgroundColor = p1newCol;
+				break;
+			case 2:
+				document.getElementById("winner" + (i+1)).style.backgroundColor = p2newCol;
+		}
+	}
 }
 
 function reset() {
@@ -49,8 +65,53 @@ document.getElementById("threshold").innerHTML = toWin;
 
 // create cells
 const tabId = document.getElementById("checklist-main");
-for (var i = 1; i <= categories.length; i++) {
+for (let i = 1; i <= categories.length; i++) {
     var row = tabId.insertRow(-1);
     var cats = row.insertCell(0);
+	cats.innerHTML = categories[i-1] + " (" + weights[i-1] + " point/s)";
+	cats.id = "category" + i;
     var wins = row.insertCell(1);
+	wins.id = "winner" + i;
+	wins.style.backgroundColor = tossCol;
+	wins.addEventListener("click", () => changeWin(i));
+}
+
+function updateScores() {
+	scores[0] = 0;
+	scores[1] = 0;
+	for (var i = 0; i < winner.length; i++) {
+		switch(winner[i]) {
+			case 1:
+				scores[0] += weights[i];
+				break;
+			case 2:
+				scores[1] += weights[i];
+		}
+	}
+	let p1length = 100 * (scores[0] / totalWeights);
+	let p2length = 100 * (scores[1] / totalWeights);
+	player1bar.style.width = p1length + "%";
+	p1score.innerHTML = scores[0];
+	player2bar.style.width = p2length + "%";
+	p2score.innerHTML = scores[1];
+}
+
+function changeWin(x) {
+	winner[x-1]++;
+	winner[x-1] %= 3;
+	
+	let col = "#000000";
+	
+	switch(winner[x-1]) {
+		case 0:
+			col = tossCol;
+			break;
+		case 1:
+			col = p1newCol;
+			break;
+		case 2:
+			col = p2newCol;
+	}
+	document.getElementById("winner" + x).style.backgroundColor = col;
+	updateScores();
 }

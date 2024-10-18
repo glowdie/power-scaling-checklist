@@ -64,10 +64,10 @@
             </div>
             <!-- player customization -->
             <div class="col-4" id="custom">
-                <table class="table table-bordered" id="custom">
+                <table class="table table-bordered" id="customizer">
                     <tr>
-                        <th>Player Name</th>
-                        <th>Player Color</th>
+                        <th>Name</th>
+                        <th>Color</th>
                     </tr>
                     <tr>
                         <td>
@@ -97,16 +97,12 @@
                         <td style="position:relative;">
                             <p style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">Toss-up/Tied</p>
                         </td>
-                        <td>
-                            <div class="input-group">
-                                <input type="color" class="form-control" id="tiecol" value="#444444">
-                            </div>
-                        </td>
+                        <td style="background-color:#222222" id="tiecol"></td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <button type="button" class="btn btn-secondary" onclick="set()">Apply Changes</button>
-                            <button type="button" class="btn btn-secondary" onclick="reset()">Reset</button>
+                            <button type="button" class="btn btn-secondary" onclick="set();">Apply Changes</button>
+                            <button type="button" class="btn btn-secondary" onclick="reset();">Reset</button>
                         </td>
                     </tr>
                 </table>
