@@ -29,6 +29,8 @@ function set() {
 				document.getElementById("winner" + (i+1)).style.backgroundColor = p2newCol;
 		}
 	}
+	
+	updateScores();
 }
 
 function reset() {
@@ -68,7 +70,7 @@ const tabId = document.getElementById("checklist-main");
 for (let i = 1; i <= categories.length; i++) {
     var row = tabId.insertRow(-1);
     var cats = row.insertCell(0);
-	cats.innerHTML = categories[i-1] + " (" + weights[i-1] + " point/s)";
+	cats.innerHTML = categories[i-1] + " (" + weights[i-1] + ")";
 	cats.id = "category" + i;
     var wins = row.insertCell(1);
 	wins.id = "winner" + i;
@@ -94,6 +96,44 @@ function updateScores() {
 	p1score.innerHTML = scores[0];
 	player2bar.style.width = p2length + "%";
 	p2score.innerHTML = scores[1];
+	
+	if (scores[0] < toWin && scores[1] < toWin) {
+		overallW.innerHTML = "No winner";
+	} else {
+		if (scores[0] > scores[1]) {
+			//p1 win
+			overallW.innerHTML = p1newName + " wins! (";
+			let mov = (scores[0]-scores[1])/totalWeights * 100;
+			if (mov >= 80) {
+				overallW.innerHTML += "neg diff";
+			} else if (mov >= 60) {
+				overallW.innerHTML += "no diff";
+			} else if (mov >= 40) {
+				overallW.innerHTML += "low diff";
+			} else if (mov >= 20) {
+				overallW.innerHTML += "mid diff";
+			} else {
+				overallW.innerHTML += "high diff";
+			}
+			overallW.innerHTML += ")";
+		} else {
+			//p2 win
+			overallW.innerHTML = p2newName + " wins! (";
+			let mov = (scores[1]-scores[0])/totalWeights * 100;
+			if (mov >= 80) {
+				overallW.innerHTML += "neg diff";
+			} else if (mov >= 60) {
+				overallW.innerHTML += "no diff";
+			} else if (mov >= 40) {
+				overallW.innerHTML += "low diff";
+			} else if (mov >= 20) {
+				overallW.innerHTML += "mid diff";
+			} else {
+				overallW.innerHTML += "high diff";
+			}
+			overallW.innerHTML += ")";
+		}
+	}
 }
 
 function changeWin(x) {
