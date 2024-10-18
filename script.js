@@ -1,4 +1,4 @@
-// settings
+// settings, adding this to make sure the code pushes
 
 let p1newName = document.getElementById("p1name").value;
 let p1newCol = document.getElementById("p1col").value;
