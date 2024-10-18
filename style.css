@@ -1,0 +1,58 @@
+html, body {
+    margin: 0;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+#glow:hover {
+    color: #e3c816;
+}
+
+#bar {
+    background-color: #888;
+    height: 1em;
+    margin: 1% auto 0.5%;
+    padding: 0% !important;
+    position: relative;
+}
+
+.player {
+    font-weight: bold;
+    font-size: 1em;
+}
+
+#player1 {
+    text-align: left;
+    color: #44f;
+}
+
+#player2 {
+    text-align: right;
+    color: #f44;
+}
+
+#player1bar {
+    width: 0%;
+    left: 0;
+    background-color: #44f;
+    height: 1em;
+    position: absolute;
+}
+
+#player2bar {
+    width: 0%;
+    right: 0;
+    background-color: #f44;
+    height: 1em;
+    position: absolute;
+}
+
+#p1col, #p2col, #tiecol {
+    width: 4em;
+    height: 2.3em;
+}
