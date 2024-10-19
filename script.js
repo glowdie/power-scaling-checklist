@@ -103,7 +103,9 @@ function updateScores() {
 		if (scores[0] > scores[1]) {
 			//p1 win
 			overallW.innerHTML = p1newName + " wins! (";
-			let mov = (scores[0]-scores[1])/totalWeights * 100;
+			let mov = (scores[0]-scores[1])/totalWeights * 1000;
+			mov = Math.round(mov);
+			mov /= 10;
 			if (mov >= 80) {
 				overallW.innerHTML += "neg diff";
 			} else if (mov >= 60) {
@@ -115,11 +117,13 @@ function updateScores() {
 			} else {
 				overallW.innerHTML += "high diff";
 			}
-			overallW.innerHTML += ")";
+			overallW.innerHTML += ", +" + mov + "%)";
 		} else {
 			//p2 win
 			overallW.innerHTML = p2newName + " wins! (";
-			let mov = (scores[1]-scores[0])/totalWeights * 100;
+			let mov = (scores[1]-scores[0])/totalWeights * 1000;
+			mov = Math.round(mov);
+			mov /= 10;
 			if (mov >= 80) {
 				overallW.innerHTML += "neg diff";
 			} else if (mov >= 60) {
@@ -131,7 +135,7 @@ function updateScores() {
 			} else {
 				overallW.innerHTML += "high diff";
 			}
-			overallW.innerHTML += ")";
+			overallW.innerHTML += ", +" + mov + "%)";
 		}
 	}
 }
